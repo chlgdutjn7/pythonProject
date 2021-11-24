@@ -12,14 +12,14 @@ class UI:
     def UIUpdate(self):
          pass
      
-    def UIImage(self):
+    def UIRender(self):
          pass
 
     
 
 class UIButton (UI):
     
-    def __init__ (self , image, imagesize : tuple , pos :Vector2 , size = 0):
+    def __init__ (self , image, imagesize : tuple , pos :Vector2 , BtnExecute,size = 0):
         
         centerX = imagesize[0] * 0.5 
         centerY = imagesize[1] * 0.5 
@@ -36,6 +36,7 @@ class UIButton (UI):
         self._range = size
         
         self._currentimage = image[0]
+        self._btnExecute = BtnExecute
         
  
 
@@ -44,14 +45,23 @@ class UIButton (UI):
     def UIUpdate(self):
         
         _mousePos = pygame.mouse.get_pos()
-        
-        if pygameUtill.UIBoxCrush(self._position , _mousePos , self._rect):
+        mouseinButton = pygameUtill.UIBoxCrush(self._position , _mousePos , self._rect)
+        if mouseinButton:
             self._currentimage = self._image[1]
-                        
         else:
             self._currentimage = self._image[0]
         
+        
+
+        for event in pygame.event.get():
+            if event == pygame.MOUSEBUTTONDOWN:
+               if mouseinButton:
+                   self._btnExecute();
+            
+        
+        
+        
     
-    def UIImage(self):
-        pygameUtill.DrawImage(self._currentimage , self._position ,self._rect)        
-    
+    def UIRender(self):
+        pygameUtill.DrawImage(self._currentimage , self._position ,self._rect)  
+        

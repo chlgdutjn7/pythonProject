@@ -8,7 +8,7 @@ from pygame import Rect
 class pygameUtill:
     
     _instance = None
-    _filePath = os.getcwd() + "\\PyGame\\Resource\\"
+    _filePath = os.getcwd() + "/Resource/"
 
 
 #pygame 초기화

@@ -16,3 +16,5 @@ class SceneBase:
     def ChangeScene(self , ChangeScene):
         ChangeScene.init()
         return ChangeScene
+    
+    
