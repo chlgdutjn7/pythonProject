@@ -62,6 +62,7 @@ class pygameUtill:
         
         return True      
         
+    #이미지 중간부터 그리기(피봇이 다름)
     @classmethod
     def DrawImage(cls , img , pos : Vector2, rect : Rect):
         
@@ -70,13 +71,23 @@ class pygameUtill:
              pos[1] - rect.top,                                                          
             rect.width + pos[0],
             pos[1] - rect.height
-            )
-        
+            )       
         
         cls._screen.blit(img , tempRact)
-    
-    
-    
-    
+        
+        
+    #이미지 좌측상단부터 그리기 (피봇이 다름)
+    @classmethod
+    def DrawImageNormal(cls , img , pos : Vector2):
+        cls._screen.blit(img , pos)
+        
         
     
+    @classmethod
+    def GetFont (cls, FontType , FontSize , Bold = False, italic = False):
+        return pygame.font.SysFont(FontType , FontSize, Bold ,italic )
+    
+    @classmethod
+    def FontRender (cls, Font ,Text , Pos ,  antialias = True, Color = (255,255,255)):
+        text = Font.render(Text , antialias , Color)
+        cls._screen.blit(text, Pos)

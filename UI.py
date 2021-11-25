@@ -9,7 +9,7 @@ class UI:
     _rect = Rect(0,0,0,0);
     _range = 0.0
     _position = None
-    def UIUpdate(self):
+    def UIUpdate(self , events):
          pass
      
     def UIRender(self):
@@ -37,12 +37,11 @@ class UIButton (UI):
         
         self._currentimage = image[0]
         self._btnExecute = BtnExecute
+        self._btnCheck = False
         
- 
-
+                
         
-        
-    def UIUpdate(self):
+    def UIUpdate(self , events):
         
         _mousePos = pygame.mouse.get_pos()
         mouseinButton = pygameUtill.UIBoxCrush(self._position , _mousePos , self._rect)
@@ -50,18 +49,13 @@ class UIButton (UI):
             self._currentimage = self._image[1]
         else:
             self._currentimage = self._image[0]
-        
-        
-
-        for event in pygame.event.get():
-            if event == pygame.MOUSEBUTTONDOWN:
-               if mouseinButton:
-                   self._btnExecute();
             
+        for event in events:
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                if mouseinButton and self._btnCheck:
+                    self._btnExecute();
         
         
-        
-    
     def UIRender(self):
         pygameUtill.DrawImage(self._currentimage , self._position ,self._rect)  
         

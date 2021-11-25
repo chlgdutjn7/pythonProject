@@ -7,24 +7,33 @@ from ObjectUtill import pygameUtill
 
 pygameUtill.pygameInit(1920 , 1080)
 
-_currentScene = SceneBase()
-_mainScene = MainScene()
+_currentScene = MainScene()
 
-_currentScene = _mainScene;
 _gameRoop = True
 
 
 while _gameRoop:
+    
+    
+    pygameUtill._screen.fill((0,0,0))
+    
            
-      
-    for event in pygame.event.get():
-               
+    events = pygame.event.get()    
+    for event in events:
+        
         if event.type == pygame.QUIT:
             _gameRoop = False
             
     
     _currentScene.Render()
-    _currentScene.Update()
-                
+    _currentScene.Update(events)
+    if _gameRoop == True:
+        _gameRoop = not _currentScene.GameExit()
+    
+    TempScene = _currentScene.ChangeScene()
+    if TempScene != None:
+        _currentScene = TempScene
+
+    
     pygameUtill._clock.tick(144)
     pygame.display.update()

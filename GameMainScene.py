@@ -1,11 +1,13 @@
 from GameSceneBase import SceneBase
 import pygame 
 from ObjectUtill import pygameUtill
+from GameSelectScene import SelectScene
 from UI import *
 
 class MainScene (SceneBase): 
     
     def Sceneinit(self):
+        
         _startImage = []
         _ExitImage = []
         
@@ -25,33 +27,29 @@ class MainScene (SceneBase):
         return super().Sceneinit()
     
     def __init__ (self):
-        self.Sceneinit()
-        
-       
-        
-        
+        self.Sceneinit()        
     
-    def Update(self):     
-        self._startBtn.UIUpdate()
-        self._endBtn.UIUpdate()
-           
-
-        
+    def Update(self , events):     
+        self._startBtn.UIUpdate(events)
+        self._endBtn.UIUpdate(events)        
         
     def Render(self):
         self._startBtn.UIRender()
         self._endBtn.UIRender()
-        
     
-
-        
         
     def GameStartBtn(self):
-        print ("게임 시작 실행") 
+        self._sceneChange = True
+    
     
     def ExitBtn(self):
-        print ("게임에서 나감") 
+        self._gameExit = True
     
+    def ChangeScene (self):        
+        if self._sceneChange:
+            return SelectScene()
+        else:
+            return None
     
     
         
