@@ -79,8 +79,7 @@ class pygameUtill:
     #이미지 좌측상단부터 그리기 (피봇이 다름)
     @classmethod
     def DrawImageNormal(cls , img , pos : Vector2):
-        cls._screen.blit(img , pos)
-        
+        cls._screen.blit(img , pos)        
         
     
     @classmethod

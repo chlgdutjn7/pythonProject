@@ -5,10 +5,7 @@ from pygame import Rect, Vector2
 
 class UI:
         
-    _image = None
-    _rect = Rect(0,0,0,0);
-    _range = 0.0
-    _position = None
+
     def UIUpdate(self , events):
          pass
      
@@ -24,6 +21,14 @@ class UIButton (UI):
         centerX = imagesize[0] * 0.5 
         centerY = imagesize[1] * 0.5 
         
+        
+        
+        self._image = None
+        self._rect = Rect(0,0,0,0);
+        self._range = 0.0
+        self._position = None
+    
+    
         
         self._rect.top = centerY
         self._rect.height = -centerY
@@ -52,7 +57,7 @@ class UIButton (UI):
             
         for event in events:
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                if mouseinButton and self._btnCheck:
+                if mouseinButton:
                     self._btnExecute();
         
         
