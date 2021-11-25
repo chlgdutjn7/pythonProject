@@ -1,13 +1,25 @@
 import pygame
 from ObjectUtill import *
 from PlayerImage import ChracterImage 
-from GameSelectManager import *
+from GameManager import *
 from pygame import math
+import math as mt
+
+class Object:
+            
+    def Update(event):
+        pass
+    
+    def Render():
+        pass
 
 
-class Chracter:
+
+class Chracter (Object):
     
     def __init__(self , Image ,playerNumber , Pos : Vector2 , speed ):
+        
+        self._circleCrush = True;  
         
         if playerNumber == 0:
             self._playerName = SelectManager._player1Name
@@ -16,14 +28,17 @@ class Chracter:
         if playerNumber == 1:
             self._playerName = SelectManager._player2Name
             self._Player = SelectManager._player2
-            
-        self._playerPos = Pos
+        
+          
+        self._pos = Pos
         self._speed = speed;
+        self._size = 50
         
         self._dirX = 0.0
         self._dirY = 0.0
         
-        Tempimage = transform.scale(Image , (50 , 50))        
+        
+        Tempimage = transform.scale(Image , (self._size , self._size))        
         self._image = ChracterImage(Tempimage , Tempimage.get_size())     
         
         
@@ -92,23 +107,53 @@ class Chracter:
                     
                     
     def PlayerMoveMent(self, event):
+        
         Dir = self.PlayerMoveKeyCheck(event)
         AddX = Dir[0] * pygameUtill._clockDT * self._speed
         AddY = Dir[1] * pygameUtill._clockDT * self._speed
-        Map = Rect(0.0 , 0.0 , pygameUtill._width ,   pygameUtill._height)
-        if  AddX != 0:
-            if pygameUtill.XMapCrush([self._playerPos[0] + AddX ,self._playerPos[1]] , self._image._rect) :            
-                self._playerPos[0] += AddX
-        if  AddY != 0: 
-            if pygameUtill.YMapCrush([self._playerPos[0] ,self._playerPos[1] + AddY] , self._image._rect) :            
-                self._playerPos[1] += AddY
-              
         
-        print (self._playerPos)
+        if AddX != 0  or AddY != 0:
+            self.PlayerAngle(AddX , AddY)
+            pass
         
+        if pygameUtill.XMapCrush([self._pos[0] + AddX ,self._pos[1]] , self._image._rect) :
+                if not self.CrushCheckObj(self._pos[0] + AddX , self._pos[1]):
+                    self._pos[0] += AddX
+        if pygameUtill.YMapCrush([self._pos[0] ,self._pos[1] + AddY] , self._image._rect) :       
+            if not self.CrushCheckObj(self._pos[0] ,self._pos[1] + AddY):     
+                self._pos[1] += AddY
+                
+        
+        
+    def PlayerAngle(self , addX , addY):
+        angle = mt.atan2(addY,addX)
+        print (angle)
+        self._image._roateImage = transform.rotate(self._image._image ,mt.degrees(angle))
+        pass
+        
+        
+    
+    def CrushCheckObj (self , PosX, PosY):
+        crushCheck = False
+        
+        for obj in GameManager._objectList:
+            if obj._image._id == self._image._id:
+                continue
+            if self._circleCrush == True and obj._circleCrush == True:
+                crushCheck = pygameUtill.CircleCrush(Vector2(PosX, PosY) , obj._pos ,self._size ,  obj._size / 2.0)
+            else:
+                pass
             
-    def PlayerUpdate(self, event):
+            if crushCheck == True:
+                break
+        
+        return crushCheck
+        
+        
+        
+    
+    def Update(self, event):
         self.PlayerMoveMent(event)
     
-    def PlayerRender(self):
-        pygameUtill.DrawImage(self._image._image, self._playerPos , self._image._rect)
+    def Render(self):
+        pygameUtill.DrawImage(self._image._roateImage, self._pos , self._image._rect)

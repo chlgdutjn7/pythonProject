@@ -29,7 +29,7 @@ class pygameUtill:
     #원형 충돌
     @classmethod
     def CircleCrush(cls , vec1  : Vector2, vec2  : Vector2, size1, size2):
-        dist = Vector2.distance_to(vec1, vec2)
+        dist = Vector2.distance_to (vec1 , vec2)
         if dist < size1 + size2:
             return True
         return False

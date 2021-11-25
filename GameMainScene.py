@@ -21,8 +21,8 @@ class MainScene (SceneBase):
         _ExitImage.append(pygame.image.load(pygameUtill._filePath + "image/Button/Exit2.png"))
                
                
-        self._startBtn = UIButton(_startImage, _startImage[0].get_size() , (400 , 500) , self.GameStartBtn)
-        self._endBtn = UIButton(_ExitImage, _ExitImage[0].get_size() , (400 , 700) , self.ExitBtn)
+        self._startBtn = UIButton(_startImage, _startImage[0].get_size() , Vector2(400 , 500) , self.GameStartBtn)
+        self._endBtn = UIButton(_ExitImage, _ExitImage[0].get_size() , Vector2(400 , 700) , self.ExitBtn)
         
         
         return super().Sceneinit()

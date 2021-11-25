@@ -1,7 +1,7 @@
 from GameSceneBase import SceneBase
 from GameInGameScene import InGameScene
 from ObjectUtill import *
-from GameSelectManager import * 
+from GameManager import * 
 from UI import UIButton
 
 class SelectScene (SceneBase):
