@@ -18,11 +18,12 @@ class InGameScene (SceneBase):
     def Update(self , events):
         self._player1.Update(events)
         self._player2.Update(events)
-        
+        GameManager.BulletUpdate()
                 
     def Render(self):
         self._player1.Render()
         self._player2.Render()
+        GameManager.BulletRender()
     
     
     def ChangeScene (self):        

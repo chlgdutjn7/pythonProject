@@ -36,6 +36,8 @@ class SelectScene (SceneBase):
         self._btnUIList.append(_firstCracter)
         self._btnUIList.append(_sceondCracter)
         self._btnUIList.append(_startBtn)
+        self._hp = 100
+        self._maxHp = self._hp
         
         
         self._font = pygameUtill.GetFont("arial" , 30)
@@ -103,10 +105,4 @@ class SelectScene (SceneBase):
             pygameUtill.DrawImageNormal(self._chracterCheckImage  , (600 , 900))              
             
         if SelectManager._player2 != None:
-            pygameUtill.DrawImageNormal(self._chracterCheckImage  ,  (1100 , 900))
-            
-            
-            
-            
-            
-        
+            pygameUtill.DrawImageNormal(self._chracterCheckImage  ,  (1100 , 900))                    

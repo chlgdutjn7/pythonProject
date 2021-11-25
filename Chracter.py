@@ -5,6 +5,9 @@ from GameManager import *
 from pygame import math
 import math as mt
 
+from NormalSkill import NormalSkill
+
+
 class Object:
             
     def Update(event):
@@ -37,9 +40,14 @@ class Chracter (Object):
         self._dirX = 0.0
         self._dirY = 0.0
         
+        self.angle = 0
+        
         
         Tempimage = transform.scale(Image , (self._size , self._size))        
         self._image = ChracterImage(Tempimage , Tempimage.get_size())     
+        
+        self._skills = [NormalSkill(self._image._id , 0.5 ,  500)]
+        self._hp = 100
         
         
     def PlayerMoveKeyCheck(self , events):
@@ -59,7 +67,15 @@ class Chracter (Object):
                        self._dirX = 1.0
                         
                     if event.key == pygame.K_KP5:
-                        self._dirY = -1.0
+                        self._dirY = -1.0                   
+                    
+                    if event.key == pygame.K_p:
+                        self.UseSkill(0)
+                                            
+                    if event.key == pygame.K_LEFTBRACKET:
+                        pass
+                    if event.key == pygame.K_RIGHTBRACKET :
+                        pass
                         
                         
                 if event.type == pygame.KEYUP:
@@ -76,6 +92,7 @@ class Chracter (Object):
                        self._dirY = 0
                 
                 
+                
             
         if self._playerName == SelectManager._player2Name:
             for event in events:
@@ -88,6 +105,13 @@ class Chracter (Object):
                         self._dirX = 1.0
                     if event.key == pygame.K_w:
                         self._dirY = -1.0
+                    if event.key == pygame.K_t:
+                        pass                    
+                    if event.key == pygame.K_y:
+                        pass
+                    if event.key == pygame.K_u:
+                        pass
+                    
                                                
                         
                 if event.type == pygame.KEYUP:
@@ -126,9 +150,9 @@ class Chracter (Object):
         
         
     def PlayerAngle(self , addX , addY):
-        angle = mt.atan2(addY,addX)
-        print (angle)
-        self._image._roateImage = transform.rotate(self._image._image ,mt.degrees(angle))
+        self.angle = mt.atan2(addY,addX)
+        print (self.angle)
+        self._image._roateImage = transform.rotate(self._image._image ,mt.degrees(self.angle))
         pass
         
         
@@ -140,7 +164,7 @@ class Chracter (Object):
             if obj._image._id == self._image._id:
                 continue
             if self._circleCrush == True and obj._circleCrush == True:
-                crushCheck = pygameUtill.CircleCrush(Vector2(PosX, PosY) , obj._pos ,self._size ,  obj._size / 2.0)
+                crushCheck = pygameUtill.CircleCrush(Vector2(PosX, PosY) , obj._pos ,self._size *0.5,  obj._size *0.5)
             else:
                 pass
             
@@ -157,3 +181,13 @@ class Chracter (Object):
     
     def Render(self):
         pygameUtill.DrawImage(self._image._roateImage, self._pos , self._image._rect)
+        
+    def UseSkill(self, skillType):
+        
+        sin = mt.sin(self.angle)
+        cos = mt.cos(self.angle)
+        
+        Dir = Vector2(cos , sin)
+        Dir = Dir.normalize();
+        self._skills[skillType].Execute(Dir , self._pos)    
+        
