@@ -35,5 +35,5 @@ while _gameRoop:
         _currentScene = TempScene
 
     
-    pygameUtill._clock.tick(144)
+    pygameUtill.ClockTick(144)
     pygame.display.update()

@@ -19,7 +19,10 @@ class pygameUtill:
         cls._size = [width , height]
         cls._gameTitle = "GameProject"
         cls._clock = pygame.time.Clock()
+        cls._clockDT = 0;
         cls._screen = pygame.display.set_mode(cls._size)
+        cls._width = width
+        cls._height = height
         pygame.display.set_caption(cls._gameTitle);
         
         
@@ -42,15 +45,35 @@ class pygameUtill:
     
     #박스 충돌
     @classmethod
-    def BoxCrush(cls , vec1 : Vector2, vec2 : Vector2 ,  Rect1 , Rect2):
-        if not (vec1.y + Rect1.top > vec2.y + Rect2.height and vec1.y + Rect1.height < vec2.y + Rect2.top):
+    def BoxCrush(cls , vec1 : Vector2, vec2 : Vector2 ,  Rect1 : Rect, Rect2: Rect):
+        if not (vec1[1] + Rect1.top > vec2[1] + Rect2.height and
+                vec1[1] + Rect1.height < vec2[1] + Rect2.top):
             return False
         
-        if not(vec1.x + Rect1.width > vec2.y + Rect2.left and 
-               vec1.x + Rect1.left < vec2.y + Rect2.width):
+        if not(vec1[0] + Rect1.width > vec2[0] + Rect2.left and 
+               vec1[0] + Rect1.left < vec2[0] + Rect2.width):
             return False
         
         return True
+    
+    
+    #맵 충돌 
+    @classmethod
+    def XMapCrush(cls , vec1 : Vector2, Rect: Rect):               
+        if (vec1[0] + Rect.width < cls._width  and 
+               vec1[0] + Rect.left > 0):
+            return True        
+        return False
+    
+    @classmethod    
+    def YMapCrush(cls , vec1 : Vector2, Rect: Rect):
+        if (vec1[1] + Rect.top < cls._height and vec1[1] + Rect.height > 0):
+              return True
+        return False
+    
+        
+    
+    
     
     @classmethod
     def UIBoxCrush (cls , vec1 : Vector2,  vec2 : Vector2 , rect : Rect):
@@ -61,6 +84,8 @@ class pygameUtill:
             return False
         
         return True      
+    
+    
         
     #이미지 중간부터 그리기(피봇이 다름)
     @classmethod
@@ -90,3 +115,8 @@ class pygameUtill:
     def FontRender (cls, Font ,Text , Pos ,  antialias = True, Color = (255,255,255)):
         text = Font.render(Text , antialias , Color)
         cls._screen.blit(text, Pos)
+        
+    @classmethod
+    def ClockTick(cls , Data):
+        cls._clockDT = cls._clock.tick(Data)
+    
