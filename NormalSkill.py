@@ -1,6 +1,7 @@
 from Bullet import *
 from pygame import *
 from SkillBase import *
+import math as mt
 
 from GameManager import *
 from ObjectUtill import *
@@ -20,9 +21,15 @@ class NormalSkill (SkillBase):
         
         
     
-    def Execute (self , Dir , StartPos):
+    def Execute (self , Angle , StartPos):
                 
         if (self._skillCoolTime < (pygame.time.get_ticks() - self.currentTime)):
+            
+            sin = mt.sin(Angle)
+            cos = mt.cos(Angle)
+        
+            Dir = Vector2(cos , sin)
+            Dir = Dir.normalize();
             
             GameManager.BulletAdd(Bullet(self.image , Dir , StartPos, self._id , self._range , self._damage , self._speed))
             self.currentTime = pygame.time.get_ticks()

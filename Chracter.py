@@ -6,6 +6,9 @@ from pygame import math
 import math as mt
 
 from NormalSkill import NormalSkill
+from MultiShotSkill import MultiShotSkill
+from RandomShotSkill import RandomShotSkill
+
 
 
 class Object:
@@ -21,7 +24,7 @@ class Object:
 class Chracter (Object):
     
     def __init__(self , Image ,playerNumber , Pos : Vector2 , speed ):
-        
+        self._skills = []
         self._circleCrush = True;  
         
         if playerNumber == 0:
@@ -46,7 +49,14 @@ class Chracter (Object):
         Tempimage = transform.scale(Image , (self._size , self._size))        
         self._image = ChracterImage(Tempimage , Tempimage.get_size())     
         
-        self._skills = [NormalSkill(self._image._id , 0.5 ,  500)]
+        self._skills.append(NormalSkill(self._image._id , 0.5 ,  500))
+        
+        self._skills.append(MultiShotSkill(self._image._id , 1.0 , 5 , 60 ,  1000))
+        self._skills.append(RandomShotSkill(self._image._id , 1.0 , 5 , 0.1, 60 ,  1000))
+
+        
+        
+        
         self._hp = 100
         
         
@@ -73,9 +83,10 @@ class Chracter (Object):
                         self.UseSkill(0)
                                             
                     if event.key == pygame.K_LEFTBRACKET:
-                        pass
+                        self.UseSkill(1)
+
                     if event.key == pygame.K_RIGHTBRACKET :
-                        pass
+                        self.UseSkill(2)
                         
                         
                 if event.type == pygame.KEYUP:
@@ -182,12 +193,7 @@ class Chracter (Object):
     def Render(self):
         pygameUtill.DrawImage(self._image._roateImage, self._pos , self._image._rect)
         
-    def UseSkill(self, skillType):
-        
-        sin = mt.sin(self.angle)
-        cos = mt.cos(self.angle)
-        
-        Dir = Vector2(cos , sin)
-        Dir = Dir.normalize();
-        self._skills[skillType].Execute(Dir , self._pos)    
+    def UseSkill(self, skillType):        
+
+        self._skills[skillType].Execute(self.angle , self._pos)    
         

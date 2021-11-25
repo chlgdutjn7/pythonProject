@@ -1,7 +1,6 @@
 from Bullet import *
 
 class SkillBase:
-    def Update(self):
-        pass
-    def Render(self):
+
+    def Execute (self , Angle , StartPos):
         pass

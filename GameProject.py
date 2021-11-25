@@ -9,10 +9,10 @@ pygameUtill.pygameInit(1920 , 1080)
 
 _currentScene = MainScene()
 
-_gameRoop = True
+_gameLoop = True
 
 
-while _gameRoop:
+while _gameLoop:
     
     
     pygameUtill._screen.fill((0,0,0))
@@ -22,13 +22,13 @@ while _gameRoop:
     for event in events:
         
         if event.type == pygame.QUIT:
-            _gameRoop = False
+            _gameLoop = False
             
     
     _currentScene.Render()
     _currentScene.Update(events)
-    if _gameRoop == True:
-        _gameRoop = not _currentScene.GameExit()
+    if _gameLoop == True:
+        _gameLoop = not _currentScene.GameExit()
     
     TempScene = _currentScene.ChangeScene()
     if TempScene != None:
