@@ -13,8 +13,8 @@ class InGameScene (SceneBase):
         BombImage = pygame.image.load(pygameUtill._filePath +  "/Image/Bullet/bomb.png")
         BoomImage = pygame.image.load(pygameUtill._filePath +  "/Image/Bullet/boom.png")
         
-        self._player1 = Chracter(player1Image , 0 , Vector2 (100 , 100) , 1)
-        self._player2 = Chracter(player1Image , 1 , Vector2 (200 , 200) , 1)
+        self._player1 = Chracter(player1Image , 0 , Vector2 (100 , 100) , 0.3)
+        self._player2 = Chracter(player1Image , 1 , Vector2 (200 , 200) , 0.3)
         
         
         self._Boom = Bomb(BombImage , BoomImage , Vector2 (500 , 500) , 100 , 10)

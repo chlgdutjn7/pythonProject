@@ -217,7 +217,7 @@ class Chracter (Object):
     
     def increaseMP (self):
         
-        self._mp += 0.05 * pygameUtill._clockDT
+        self._mp += 0.002 * pygameUtill._clockDT
         
         if self._mp >= 100:
             self._mp = 100
