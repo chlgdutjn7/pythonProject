@@ -41,12 +41,27 @@ class GameManager:
         
         for DestroyValue in DestroyList:
             cls._BulletList.remove(DestroyValue)
+            
+    @classmethod
+    def ObjUpdate(cls , events):
+        DestroyList = []
+        for obj in cls._objectList:
+            obj.Update(events)
+            if obj._isDead:
+                DestroyList.append(obj)
+        
+        for DestroyValue in DestroyList:
+            cls._objectList.remove(DestroyValue)
 
             
     @classmethod
     def BulletRender(cls):        
         for bullet in cls._BulletList:
             bullet.Render()
+    @classmethod
+    def ObjRender(cls):        
+        for obj in cls._objectList:
+            obj.Render()
         
         
     

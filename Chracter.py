@@ -49,15 +49,12 @@ class Chracter (Object):
         Tempimage = transform.scale(Image , (self._size , self._size))        
         self._image = ChracterImage(Tempimage , Tempimage.get_size())     
         
-        self._skills.append(NormalSkill(self._image._id , 0.5 ,  500))
-        
+        self._skills.append(NormalSkill(self._image._id , 0.5 ,  500))        
         self._skills.append(MultiShotSkill(self._image._id , 1.0 , 5 , 60 ,  1000))
         self._skills.append(RandomShotSkill(self._image._id , 1.0 , 5 , 0.1, 60 ,  1000))
-
-        
-        
         
         self._hp = 100
+        self._isDead = False
         
         
     def PlayerMoveKeyCheck(self , events):
