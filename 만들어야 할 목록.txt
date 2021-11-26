@@ -1,20 +1,23 @@
-------기반 작성하기
-이미지 생성 O
-충돌 체크 O
-------플레이어 구현
+------ 위치조정 
 
-플레이어 움직이기  구현 O
-플레이어 앵글 변환 구현 O
-플레이어 총알 구현 O
-플레이어 총알 스킬 구현 O
-플레이어 각각 스킬 구현  O
-캐릭터 HP MP 구현 O
+폭탄 설치 (수는 팀원분들이랑 상의해서 결정)
+플레이어 위치 조절 
+UI 위치 조절 
+UI 크기 조절
+스킬 매개 변수 조절 
+컴퓨터 스크린 화면 
+{
+    스크립트
+    GameProject.py
+    변경
+    pygameUtill.pygameInit(x , y)
+}
 
-------기믹 구현
-폭탄 O
 
-------씬 구현
-메인 구현 O
-캐릭터 선택 구현 O
-인게임 구현 진행중 O
-엔딩 구현  O
+크기 조절 
+_chracterFirstImage[0] = transform.scale(_chracterFirstImage[0] , (200 , 200))
+_chracterFirstImage[1] = transform.scale(_chracterFirstImage[1] , (200 , 200))
+
+
+폭턴 설치 
+self._Booms.append(Bomb(BombImage , BoomImage , Vector2 (500 , 500) , 100 , 10))

@@ -8,23 +8,34 @@ from EndingScene import *
 
 class InGameScene (SceneBase):
     
-    def __init__(self):
-        player1Image = pygame.image.load(pygameUtill._filePath +  "image/SelectChracter/chracterBtn 1-1.png")
+    def __init__(self):      
+        
+        
+        self._Booms = []
+        
+        player1Image = pygame.image.load(pygameUtill._filePath +  "image/Player/Player1.png")
+        player2Image = pygame.image.load(pygameUtill._filePath +  "image/Player/Player2.png")
+        
         BombImage = pygame.image.load(pygameUtill._filePath +  "/Image/Bullet/bomb.png")
         BoomImage = pygame.image.load(pygameUtill._filePath +  "/Image/Bullet/boom.png")
         
         self._player1 = Chracter(player1Image , 0 , Vector2 (100 , 100) , 0.3)
-        self._player2 = Chracter(player1Image , 1 , Vector2 (200 , 200) , 0.3)
+        self._player2 = Chracter(player2Image , 1 , Vector2 (200 , 200) , 0.3)
         
         
-        self._Boom = Bomb(BombImage , BoomImage , Vector2 (500 , 500) , 100 , 10)
+        
+        self._Booms.append(Bomb(BombImage , BoomImage , Vector2 (500 , 500) , 100 , 10))
+        
+        
                
         self.PlayerList = [self._player1 , self._player2]
         self.WinnerPlayerName = None
         
         GameManager.ObjectAdd(self._player1)
         GameManager.ObjectAdd(self._player2)
-        GameManager.ObjectAdd(self._Boom)
+        
+        for boom in self._Booms:
+            GameManager.ObjectAdd(boom)
              
         
 

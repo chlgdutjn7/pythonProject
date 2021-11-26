@@ -67,14 +67,13 @@ class pygameUtill:
             return True        
         return False
     
+    
+    
     @classmethod    
     def YMapCrush(cls , vec1 : Vector2, Rect: Rect):
         if (vec1[1] + Rect.top < cls._height and vec1[1] + Rect.height > 0):
               return True
         return False
-    
-        
-    
     
     
     @classmethod

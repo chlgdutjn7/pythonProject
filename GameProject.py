@@ -25,8 +25,8 @@ while _gameLoop:
             _gameLoop = False
             
     
-    _currentScene.Render()
     _currentScene.Update(events)
+    _currentScene.Render()    
     if _gameLoop == True:
         _gameLoop = not _currentScene.GameExit()
     

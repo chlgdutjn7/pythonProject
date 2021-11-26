@@ -31,13 +31,8 @@ class RandomShotSkill (SkillBase):
     
     def Execute (self , Angle , StartPos):        
         
-        
         mythread = threading.Thread(target = self.RandShot , args = (Angle , StartPos))
         mythread.start()
-        
-            
-        
-
             
         
     def RandShot(self , Angle , StartPos):

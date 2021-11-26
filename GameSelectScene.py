@@ -29,7 +29,7 @@ class SelectScene (SceneBase):
         self._chracterCheckImage= pygame.image.load(pygameUtill._filePath + "image/SelectChracter/Check.png")
         
         
-        _firstCracter = UIButton(_chracterFirstImage , _chracterFirstImage[0].get_size() , (400 , 400) , self.GameStartSceneChracter1)
+        _firstCracter = UIButton(_chracterFirstImage  ,_chracterFirstImage[0].get_size() , (400 , 400) , self.GameStartSceneChracter1)
         _sceondCracter = UIButton(_chracterSceondImage , _chracterSceondImage[0].get_size() , (900 , 400) , self.GameStartSceneChracter2)
         _startBtn = UIButton(_gameStartImage , _gameStartImage[0].get_size() , (1500 , 970) , self.GameStartBtn)
         
@@ -90,7 +90,7 @@ class SelectScene (SceneBase):
             return
         if SelectManager._player2 == None:            
             return
-        
+                
         self._sceneChange = True;
             
     

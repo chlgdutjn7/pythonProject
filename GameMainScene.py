@@ -46,6 +46,8 @@ class MainScene (SceneBase):
     def ExitBtn(self):
         self._gameExit = True
     
+    
+    
     def ChangeScene (self):        
         if self._sceneChange:
             return SelectScene()

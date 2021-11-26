@@ -21,7 +21,7 @@ class Bomb:
         TempBoomimage = transform.scale(Image , (self._Boomsize , self._Boomsize)) 
         self._Boomimage = ChracterImage(BoomImage , TempBoomimage.get_size())  
         
-        self._hp = 100
+        self._hp = 30
         self._isDead = False
         self._isBoom = False
         self._isBoomImage = False
@@ -30,6 +30,7 @@ class Bomb:
         
         
     def Update(self, event):
+        
         if self._hp <= 0 and self._isBoomImage == False:
             self._isBoom = True
             

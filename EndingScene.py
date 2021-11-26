@@ -4,7 +4,7 @@ from pygame import Vector2
 from GameSceneBase import SceneBase
 from ObjectUtill import pygameUtill
 from  UI import UIButton
-from GameManager import GameManager
+from GameManager import GameManager, SelectManager
 
 class EndScene (SceneBase): 
         
@@ -55,6 +55,7 @@ class EndScene (SceneBase):
     def ChangeScene (self): 
         if self._sceneChange:
             from  GameMainScene import MainScene
+            SelectManager.Clear()
             return MainScene()
         else:
             return None

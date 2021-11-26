@@ -1,5 +1,7 @@
 from pygame import Rect, Vector2
 from GameManager import GameManager
+
+
 class ChracterImage:
     
     def __init__(self , Image , ImageSize):

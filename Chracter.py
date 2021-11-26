@@ -25,7 +25,10 @@ class Object:
 class Chracter (Object):
     
     def __init__(self , Image ,playerNumber , Pos : Vector2 , speed ):
+        
         self._skills = []
+        
+        
         self._circleCrush = True;  
         self._decreaseMPList = [[0,30,30] , [0,30,30]]
         
@@ -76,12 +79,12 @@ class Chracter (Object):
         self._MPimage = transform.scale(self._MPimage , self.UISize)
         
         
-        
-        self._hp = 100
         self._maxhp = 100
+        self._hp = self._maxhp
         
-        self._mp = 100
         self._maxMp = 100
+        self._mp = self._maxMp
+        
         
         self._isDead = False
         
@@ -268,13 +271,11 @@ class Chracter (Object):
             
     def pivotSetting(self, image , AddY , ratio = 1):
         
-        scale = Vector2 (image.get_size());
-        
+        scale = Vector2 (image.get_size()); 
+               
         if ratio < 0:
             ratio = 0
         scale[0] *= ratio
-        
-        
         
         tempimage = transform.scale(image , (int(scale[0]) , int(scale[1])))
         pygameUtill.DrawImageNormal(tempimage, [self._pos[0] -  image.get_size()[0] *0.5, self._pos[1] -  image.get_size()[1] *0.5 - AddY])

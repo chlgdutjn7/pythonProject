@@ -14,6 +14,11 @@ class SelectManager:
     def SelectPlayer2(cls , Player2):
         cls._player2 = Player2;
         cls._player2Name = "player2"
+        
+    @classmethod
+    def Clear(cls):
+        cls._player1 = None
+        cls._player2 = None 
 
 
 class GameManager:
