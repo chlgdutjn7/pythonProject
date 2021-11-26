@@ -16,8 +16,7 @@ class InGameScene (SceneBase):
         
         
         self._Boom = Bomb(BombImage , BoomImage , Vector2 (500 , 500) , 100 , 10)
-        
-        
+               
         
         GameManager.ObjectAdd(self._player1)
         GameManager.ObjectAdd(self._player2)
@@ -31,10 +30,14 @@ class InGameScene (SceneBase):
             obj.Update(events)
         GameManager.BulletUpdate()
         GameManager.ObjUpdate(events)
+        GameManager.mineUpdate(events)
+        GameManager.ScanSkillUpdate()
+        
                 
     def Render(self):
         GameManager.ObjRender()
         GameManager.BulletRender()
+        GameManager.mineRender()
     
     
     def ChangeScene (self):        

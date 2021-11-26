@@ -1,3 +1,6 @@
+import pygame
+from ObjectUtill import pygameUtill
+
 class SelectManager:
     
     _player1 = None
@@ -17,10 +20,19 @@ class GameManager:
     
     _objectList = []
     _BulletList = []
+    _mineList = []
+    
+    _isScanSkill = False
+    _currentTime = 0.0
+    
     _IDNumber = 0
     @classmethod
     def ObjectAdd (cls , obj):
         cls._objectList.append(obj)
+        
+    @classmethod
+    def mineAdd (cls , obj):
+        cls._mineList.append(obj)
         
     @classmethod        
     def BulletAdd (cls , obj):
@@ -30,6 +42,27 @@ class GameManager:
     def GetNumber(cls):
         cls._IDNumber += 1
         return cls._IDNumber
+    
+    @classmethod
+    def UseScanSkill(cls, Time):
+        cls._isScanSkill = True
+        cls._currentTime = pygame.time.get_ticks()
+        cls.time = Time
+        
+        
+    @classmethod
+    def ScanSkillUpdate(cls):  
+        if cls._isScanSkill == True:
+            if (pygame.time.get_ticks() - cls._currentTime) > cls.time * 1000:
+                cls._isScanSkill = False
+            
+    
+    
+    
+    
+    
+    
+    
     
     @classmethod
     def BulletUpdate(cls):
@@ -52,17 +85,34 @@ class GameManager:
         
         for DestroyValue in DestroyList:
             cls._objectList.remove(DestroyValue)
-
+            
+    @classmethod
+    def mineUpdate(cls , events):
+        DestroyList = []
+        for obj in cls._mineList:
+            obj.Update(events)
+            if obj._isDead:
+                DestroyList.append(obj)
+        
+        for DestroyValue in DestroyList:
+            cls._mineList.remove(DestroyValue)
             
     @classmethod
     def BulletRender(cls):        
         for bullet in cls._BulletList:
             bullet.Render()
+            
     @classmethod
     def ObjRender(cls):        
         for obj in cls._objectList:
-            obj.Render()
+            obj.Render()       
         
+    @classmethod
+    def mineRender(cls):        
+        for obj in cls._mineList:
+            obj.Render()
+    
+
         
     
     

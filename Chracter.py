@@ -8,7 +8,8 @@ import math as mt
 from NormalSkill import NormalSkill
 from MultiShotSkill import MultiShotSkill
 from RandomShotSkill import RandomShotSkill
-
+from ScanSkill import ScanSkill
+from MineSkill import *
 
 
 class Object:
@@ -49,9 +50,12 @@ class Chracter (Object):
         Tempimage = transform.scale(Image , (self._size , self._size))        
         self._image = ChracterImage(Tempimage , Tempimage.get_size())     
         
+        self._skills.append(ScanSkill(self._image._id , 1.0 ,5, 30 ,  self.InCreaseHP))
         self._skills.append(NormalSkill(self._image._id , 0.5 ,  500))        
-        self._skills.append(MultiShotSkill(self._image._id , 1.0 , 5 , 60 ,  1000))
+        self._skills.append(MineSkill(self._image._id , 1.0 , 100))
+        self._skills.append(MultiShotSkill(self._image._id , 1.0 , 5 , 60 ,  1000))        
         self._skills.append(RandomShotSkill(self._image._id , 1.0 , 5 , 0.1, 60 ,  1000))
+        
         
         self._hp = 100
         self._isDead = False
@@ -190,7 +194,9 @@ class Chracter (Object):
     def Render(self):
         pygameUtill.DrawImage(self._image._roateImage, self._pos , self._image._rect)
         
-    def UseSkill(self, skillType):        
-
-        self._skills[skillType].Execute(self.angle , self._pos)    
+    def UseSkill(self, skillType):
+        self._skills[skillType].Execute(self.angle , self._pos)
+        
+    def InCreaseHP(self , increaseData):    
+        self._hp += increaseData
         
