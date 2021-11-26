@@ -25,11 +25,8 @@ class MineSkill (SkillBase):
         
     
     def Execute (self , Angle , StartPos):
-                
-        if (self._skillCoolTime < (pygame.time.get_ticks() - self.currentTime)):                        
-            
             GameManager.mineAdd(mine(self.image , self.Boomimage , self._id , Vector2(StartPos) , self._range , self._damage))            
-            self.currentTime = pygame.time.get_ticks()
+        
             
         
         

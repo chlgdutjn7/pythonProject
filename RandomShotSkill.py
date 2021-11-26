@@ -31,10 +31,10 @@ class RandomShotSkill (SkillBase):
     
     def Execute (self , Angle , StartPos):        
         
-        if (self._skillCoolTime < (pygame.time.get_ticks() - self.currentTime)):
-            mythread = threading.Thread(target = self.RandShot , args = (Angle , StartPos))
-            mythread.start()
-            self.currentTime = pygame.time.get_ticks()
+        
+        mythread = threading.Thread(target = self.RandShot , args = (Angle , StartPos))
+        mythread.start()
+        
             
         
 

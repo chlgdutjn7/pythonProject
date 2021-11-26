@@ -27,24 +27,24 @@ class MultiShotSkill (SkillBase):
     
     def Execute (self , Angle , StartPos):
                 
-        if (self._skillCoolTime < (pygame.time.get_ticks() - self.currentTime)):
-            halfAngle = self._ShotAngle / 2
-            shotangle = self._ShotAngle / self._count
-            startshotAngle = -halfAngle
-            for num in range(0,self._count):
+        
+        halfAngle = self._ShotAngle / 2
+        shotangle = self._ShotAngle / self._count
+        startshotAngle = -halfAngle
+        for num in range(0,self._count):
                 
                 
-                sin = mt.sin(mt.radians(startshotAngle) + Angle)
-                cos = mt.cos(mt.radians(startshotAngle) + Angle)
-                Dir = Vector2(cos , sin)
-                Dir = Dir.normalize();
-                startshotAngle += shotangle
+            sin = mt.sin(mt.radians(startshotAngle) + Angle)
+            cos = mt.cos(mt.radians(startshotAngle) + Angle)
+            Dir = Vector2(cos , sin)
+            Dir = Dir.normalize();
+            startshotAngle += shotangle
                 
                 
-                GameManager.BulletAdd(Bullet(self.image , Dir , StartPos, self._id , self._range , self._damage , self._speed))
+            GameManager.BulletAdd(Bullet(self.image , Dir , StartPos, self._id , self._range , self._damage , self._speed))
                 
                 
-            self.currentTime = pygame.time.get_ticks()
+            
             
         
         

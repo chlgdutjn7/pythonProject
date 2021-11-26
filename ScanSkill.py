@@ -20,12 +20,10 @@ class ScanSkill (SkillBase):
         
     
     def Execute (self , Angle , StartPos):
-                
-        if (self._skillCoolTime < (pygame.time.get_ticks() - self.currentTime)):
-                        
-            self._callBack(self._treatment)
-            GameManager.UseScanSkill(self._countinueTime)
-            self.currentTime = pygame.time.get_ticks()
+                  
+        self._callBack(self._treatment)
+        GameManager.UseScanSkill(self._countinueTime)
+            
             
         
         

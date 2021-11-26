@@ -55,14 +55,6 @@ class GameManager:
         if cls._isScanSkill == True:
             if (pygame.time.get_ticks() - cls._currentTime) > cls.time * 1000:
                 cls._isScanSkill = False
-            
-    
-    
-    
-    
-    
-    
-    
     
     @classmethod
     def BulletUpdate(cls):
