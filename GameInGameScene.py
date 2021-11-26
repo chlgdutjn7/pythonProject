@@ -3,6 +3,8 @@ from GameSceneBase import SceneBase
 from ObjectUtill import *
 from Chracter import *
 from GameManager import * 
+from EndingScene import * 
+
 
 class InGameScene (SceneBase):
     
@@ -17,6 +19,8 @@ class InGameScene (SceneBase):
         
         self._Boom = Bomb(BombImage , BoomImage , Vector2 (500 , 500) , 100 , 10)
                
+        self.PlayerList = [self._player1 , self._player2]
+        self.WinnerPlayerName = None
         
         GameManager.ObjectAdd(self._player1)
         GameManager.ObjectAdd(self._player2)
@@ -32,6 +36,8 @@ class InGameScene (SceneBase):
         GameManager.ObjUpdate(events)
         GameManager.mineUpdate(events)
         GameManager.ScanSkillUpdate()
+        self.isPlayerDead()
+        self.WinnerPlayer()
         
                 
     def Render(self):
@@ -39,11 +45,31 @@ class InGameScene (SceneBase):
         GameManager.BulletRender()
         GameManager.mineRender()
     
-    
+    def isPlayerDead(self):
+        DestroyList = []
+        for player in self.PlayerList:
+            
+            if (player._isDead == True):
+                DestroyList.append(player)
+
+        for Destroy in DestroyList:
+            self.PlayerList.remove(Destroy)
+            
+            
+    def WinnerPlayer(self):
+        if len(self.PlayerList) == 1:
+            self.WinnerPlayerName = self.PlayerList[0]._playerName
+            self._sceneChange = True
+            pass
+
+
+
+
     def ChangeScene (self):        
         if self._sceneChange:
-            GameManager._objectList.clear()
-            return None
+            GameManager.ClearValue()        
+            GameManager._WinnerName = self.WinnerPlayerName
+            return EndScene()
         else:
             return None
     

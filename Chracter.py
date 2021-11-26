@@ -87,9 +87,7 @@ class Chracter (Object):
         
         
     def PlayerMoveKeyCheck(self , events):
-        
-
-    
+            
         if self._playerName == SelectManager._player1Name:
             for event in events:
                 if event.type == pygame.KEYDOWN:
@@ -130,9 +128,6 @@ class Chracter (Object):
                         
                     elif event.key == pygame.K_KP5:
                        self._dirY = 0
-                
-                
-                
             
         if self._playerName == SelectManager._player2Name:
             for event in events:

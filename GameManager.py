@@ -21,11 +21,12 @@ class GameManager:
     _objectList = []
     _BulletList = []
     _mineList = []
-    
+    _WinnerName = ""
     _isScanSkill = False
     _currentTime = 0.0
     
     _IDNumber = 0
+
     @classmethod
     def ObjectAdd (cls , obj):
         cls._objectList.append(obj)
@@ -33,6 +34,7 @@ class GameManager:
     @classmethod
     def mineAdd (cls , obj):
         cls._mineList.append(obj)
+        
         
     @classmethod        
     def BulletAdd (cls , obj):
@@ -103,6 +105,18 @@ class GameManager:
     def mineRender(cls):        
         for obj in cls._mineList:
             obj.Render()
+    
+    
+
+    @classmethod    
+    def ClearValue(cls):
+        cls._objectList.clear() 
+        cls._BulletList.clear()
+        cls._mineList.clear()
+        cls._WinPlayerName = None
+        
+    
+        
     
 
         
